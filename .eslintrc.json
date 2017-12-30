@@ -26,11 +26,23 @@
     "func-style": "off",
     "max-len": [
       "error",
-      120
+      {
+        "code": 120,
+        "ignoreUrls": true,
+        "ignoreStrings": true
+      }
     ],
     "new-cap": "error",
     "no-else-return": "off",
-    "no-magic-numbers": "error",
+    "no-magic-numbers": [
+      "error",
+      {
+        "ignore": [
+          0,
+          1
+        ]
+      }
+    ],
     "no-negated-condition": "error",
     "no-use-before-define": "off",
     "object-property-newline": "error",
