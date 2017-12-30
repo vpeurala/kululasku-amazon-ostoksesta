@@ -1,0 +1,10 @@
+{
+  "name": "kulari-amazon-ostoksesta",
+  "version": "0.0.1",
+  "description": "Automatisoi kululaskun luomisen eTaskuun Amazon-ostoksesta.",
+  "main": "index.js",
+  "repository": "git@github.com:vpeurala/kulari-amazon-ostoksesta.git",
+  "author": "Ville Peurala <ville.peurala@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
