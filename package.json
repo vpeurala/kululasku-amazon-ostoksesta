@@ -1,5 +1,5 @@
 {
-  "name": "kulari-amazon-ostoksesta",
+  "name": "kululasku-amazon-ostoksesta",
   "version": "0.0.1",
   "description": "Automatisoi kululaskun luomisen eTaskuun Amazon-ostoksesta.",
   "main": "src/create_kululasku.js",
