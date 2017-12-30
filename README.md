@@ -5,7 +5,7 @@ Automatisoi kululaskun luonnin eTaskuun Amazon-ostoksesta.
 Sinun pitää asettaa seuraavat ympäristömuuttujat ajon yhteydessä:
 * ETASKU_USERNAME = käyttäjätunnuksesi eTaskuun.
 * ETASKU_PASSWORD = salasanasi eTaskuun.
-* ETASKU_RECEIPT_FILE = kuittitiedosto (yleensä pdf).
+* ETASKU_RECEIPT_FILE = kuittitiedosto, pdf-muodossa.
 
 Esimerkki käytöstä:
 
