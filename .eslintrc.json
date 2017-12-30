@@ -1,0 +1,62 @@
+{
+  "root": true,
+  "plugins": [
+    "testcafe"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:testcafe/recommended"
+  ],
+  "env": {
+    "browser": false,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "rules": {
+    "arrow-parens": [
+      "error",
+      "always"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "func-style": "off",
+    "max-len": [
+      "error",
+      120
+    ],
+    "new-cap": "error",
+    "no-else-return": "off",
+    "no-magic-numbers": "error",
+    "no-negated-condition": "error",
+    "no-use-before-define": "off",
+    "object-property-newline": "error",
+    "object-shorthand": "off",
+    "one-var": [
+      "error",
+      "never"
+    ],
+    "quote-props": [
+      "error",
+      "always"
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "require-jsdoc": "off",
+    "semi": [
+      "error",
+      "always"
+    ],
+    "sort-keys": "error",
+    "strict": [
+      "error",
+      "global"
+    ],
+    "valid-jsdoc": "error"
+  }
+}
