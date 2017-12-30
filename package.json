@@ -4,7 +4,7 @@
   "description": "Automatisoi kululaskun luomisen eTaskuun Amazon-ostoksesta.",
   "main": "src/create_kululasku.js",
   "scripts": {
-    "kulari": "testcafe firefox src/create_kululasku.js",
+    "kululasku": "testcafe chrome src/create_kululasku.js",
     "lint": "eslint 'src/create_kululasku.js'"
   },
   "repository": "git@github.com:vpeurala/kulari-amazon-ostoksesta.git",
