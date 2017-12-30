@@ -1,3 +1,12 @@
-# kulari-amazon-ostoksesta
+# kululasku-amazon-ostoksesta
 
-kulari-amazon-ostoksesta
+Automatisoi kululaskun luonnin eTaskuun Amazon-ostoksesta.
+
+Sinun pitää asettaa seuraavat ympäristömuuttujat ajon yhteydessä:
+* ETASKU_USERNAME = käyttäjätunnuksesi eTaskuun.
+* ETASKU_PASSWORD = salasanasi eTaskuun.
+* ETASKU_RECEIPT_FILE = kuittitiedosto (yleensä pdf).
+
+Esimerkki käytöstä:
+
+`ETASKU_USERNAME='ville.peurala@wunderdog.fi' ETASKU_PASSWORD='Mansikka2' ETASKU_RECEIPT_FILE='/Users/vpeurala/Documents/Wunderdog_kularit/2017_12_30/Autotools.pdf' yarn kululasku`
