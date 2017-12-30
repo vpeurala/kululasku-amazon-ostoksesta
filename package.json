@@ -2,9 +2,20 @@
   "name": "kulari-amazon-ostoksesta",
   "version": "0.0.1",
   "description": "Automatisoi kululaskun luomisen eTaskuun Amazon-ostoksesta.",
-  "main": "index.js",
+  "main": "src/create_kululasku.js",
+  "scripts": {
+    "kulari": "testcafe firefox src/create_kululasku.js",
+    "lint": "eslint 'src/create_kululasku.js'"
+  },
   "repository": "git@github.com:vpeurala/kulari-amazon-ostoksesta.git",
   "author": "Ville Peurala <ville.peurala@gmail.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "testcafe": "^0.18.6"
+  },
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "eslint-plugin-testcafe": "^0.2.1"
+  }
 }
