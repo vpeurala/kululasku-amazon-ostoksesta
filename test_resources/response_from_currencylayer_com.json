@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "terms": "https://currencylayer.com/terms",
+  "privacy": "https://currencylayer.com/privacy",
+  "timestamp": 1514679558,
+  "source": "USD",
+  "quotes": {
+    "USDUSD": 1,
+    "USDEUR": 0.833204
+  }
+}

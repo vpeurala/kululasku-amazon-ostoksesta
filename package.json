@@ -13,6 +13,8 @@
   "private": true,
   "dependencies": {
     "moment": "^2.20.1",
+    "nock": "^9.1.5",
+    "sync-request": "^4.1.0",
     "tape": "^4.8.0",
     "testcafe": "^0.18.6"
   },
