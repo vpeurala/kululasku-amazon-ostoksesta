@@ -14,6 +14,7 @@ const kirjaudu_sisaan = selector("input.loginbutton");
 // Kululaskun syöttösivu
 const luo_tosite = selector("div#customertools.actionbutton");
 const lisaa_tiedosto = selector("#uploadifive-fileDropZone input[type=file]");
+const ostopaiva = selector("input#date.tcal.tcalInput");
 const ostopaikka = selector("input#receipt_name");
 const lisatietoa = selector("textarea#show_comment_edit");
 const hinta = selector("input#show_price_edit");
@@ -33,6 +34,7 @@ module.exports = {
     "kirjaudu_sisaan": kirjaudu_sisaan,
     "luo_tosite": luo_tosite,
     "lisaa_tiedosto": lisaa_tiedosto,
+    "ostopaiva": ostopaiva,
     "ostopaikka": ostopaikka,
     "lisatietoa": lisatietoa,
     "hinta": hinta,

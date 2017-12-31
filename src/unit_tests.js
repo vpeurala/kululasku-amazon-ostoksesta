@@ -22,6 +22,7 @@ test("pdf_parsing", (t) => {
 
 test("currency conversion", (t) => {
     t.plan(1);
+    // TODO Use Nock to prevent a real API call to currencylayer.com in unit tests.
     nock("http://apilayer.net");
     let expected = 18.955391;
     let actual = currency_conversion.usd_to_eur(parseFloat(expected_parse_result.price_in_usd));
