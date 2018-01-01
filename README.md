@@ -22,3 +22,4 @@ TODO:
 * Pysäytä prosessi heti jos PDF:n parsinnassa tapahtuu jokin virhe.
 * Tarkista ohjelmallisesti heti prosessin alussa, löytyykö käyttäjän koneelta kaikki tarvittavat palikat (esim. pdftotext).
 * Toistaiseksi testattu vain Macilla, pitäisi kokeilla myös Linuxilla ja Windowsilla.
+* Hae valuuttakurssi (USD <-> EUR) ostopäivän mukaan.
