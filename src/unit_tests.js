@@ -41,6 +41,6 @@ test("currency conversion", async (t) => {
         .reply(200, fs.readFileSync(__dirname + "/../test_resources/response_from_currencylayer_com.json"));
     let expected = 18.955391;
     let actual = await currency_conversion.usd_to_eur(expected_pdf_parse_result.price_in_usd);
-
+    console.log("actual after await:", actual);
     t.deepEqual(actual, expected);
 });

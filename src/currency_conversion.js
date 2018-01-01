@@ -35,17 +35,23 @@ function call_currencylayer(success_callback) {
  * TODO: Currently uses the current exchange rate. Should use the exchange rate of the purchase day.
  *
  * @param {number} usd_amount
- * @returns {Promise<number>}
+ * @returns {number}
  */
 async function usd_to_eur(usd_amount) {
-    return await call_currencylayer(async (json) => {
+    let result = await call_currencylayer((json) => {
         if (json.success !== true) {
             throw "Getting exchange rates from currencylayer.com was not successful. Returned JSON was: " + util.inspect(json);
         }
+        console.log("json:", json);
         let exchange_rate = json.quotes.USDEUR;
-        let eur_amount = exchange_rate * usd_amount;
-        return utils.number_to_two_decimal_accuracy(eur_amount);
+        let eur_amount_with_too_many_decimals = exchange_rate * usd_amount;
+        console.log("eur_amount_with_too_many_decimals:", eur_amount_with_too_many_decimals);
+        let eur_amount_with_two_decimals = utils.number_to_two_decimal_accuracy(eur_amount_with_too_many_decimals);
+        console.log("eur_amount_with_two_decimals:", eur_amount_with_two_decimals);
+        return eur_amount_with_two_decimals;
     });
+    console.log("result:", result);
+    return await result;
 }
 
 module.exports = {
