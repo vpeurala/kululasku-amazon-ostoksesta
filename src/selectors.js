@@ -28,22 +28,22 @@ const palvelu = selector("select#Palvelu_select.dimensiongroup_select");
 const tallenna = selector("input#save_button");
 
 module.exports = {
-  "kirjaudu": kirjaudu,
-  "kayttajatunnus": kayttajatunnus,
-  "salasana": salasana,
-  "kirjauduSisaan": kirjauduSisaan,
-  "luoTosite": luoTosite,
-  "lisaaTiedosto": lisaaTiedosto,
-  "ostopaiva": ostopaiva,
-  "ostopaikka": ostopaikka,
-  "lisatietoa": lisatietoa,
+  "alue": alue,
   "hinta": hinta,
-  "verokanta": verokanta,
+  "kayttajatunnus": kayttajatunnus,
+  "kirjaudu": kirjaudu,
+  "kirjauduSisaan": kirjauduSisaan,
+  "kustannuspaikka": kustannuspaikka,
+  "lisaaTiedosto": lisaaTiedosto,
+  "lisatietoa": lisatietoa,
+  "luoTosite": luoTosite,
   "luokitus": luokitus,
   "maksutapa": maksutapa,
-  "kustannuspaikka": kustannuspaikka,
-  "toimiala": toimiala,
-  "alue": alue,
+  "ostopaikka": ostopaikka,
+  "ostopaiva": ostopaiva,
   "palvelu": palvelu,
-  "tallenna": tallenna
+  "salasana": salasana,
+  "tallenna": tallenna,
+  "toimiala": toimiala,
+  "verokanta": verokanta
 };
