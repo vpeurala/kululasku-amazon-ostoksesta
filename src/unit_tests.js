@@ -1,13 +1,16 @@
 "use strict";
-/* eslint-disable no-magic-numbers */
 
+const bluebird = require("bluebird");
+const currency_conversion = require("./currency_conversion");
 const fs = require("fs");
 const nock = require("nock");
-const test = require("tape");
-
-const currency_conversion = require("./currency_conversion");
 const parse_pdf = require("./parse_pdf");
+const tape = require("tape");
 const utils = require("./utils");
+
+const response_from_currencylayer_com = fs.readFileSync(
+    __dirname + "/../test_resources/response_from_currencylayer_com.json",
+    "ASCII");
 
 const expected_pdf_parse_result = {
     "price_in_usd": 22.75,
@@ -15,20 +18,20 @@ const expected_pdf_parse_result = {
     "purchase_date": "14.12.2017"
 };
 
-test("number rounding", (t) => {
+tape("number rounding", (t) => {
     t.plan(1);
     let expected = 13.37;
     let actual = utils.number_to_two_decimal_accuracy(13.368913453128);
     t.equal(actual, expected);
 });
 
-test("pdf parsing", (t) => {
+tape("pdf parsing", (t) => {
     t.plan(1);
     let actual_pdf_parse_result = parse_pdf.parse_pdf("./test_resources/Amazon_Invoice.pdf");
     t.deepEqual(actual_pdf_parse_result, expected_pdf_parse_result);
 });
 
-test("currency conversion", async (t) => {
+tape("currency conversion", async (t) => {
     t.plan(1);
     nock.disableNetConnect();
     nock("http://apilayer.net")
@@ -38,9 +41,8 @@ test("currency conversion", async (t) => {
             "currencies": "EUR",
             "format": 0
         })
-        .reply(200, fs.readFileSync(__dirname + "/../test_resources/response_from_currencylayer_com.json"));
-    let expected = 18.955391;
+        .reply(200, response_from_currencylayer_com);
+    let expected = 18.96;
     let actual = await currency_conversion.usd_to_eur(expected_pdf_parse_result.price_in_usd);
-    console.log("actual after await:", actual);
-    t.deepEqual(actual, expected);
+    t.equal(expected, actual);
 });
