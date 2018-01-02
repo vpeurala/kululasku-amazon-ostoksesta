@@ -1,14 +1,14 @@
 "use strict";
 
-const currency_conversion = require("./currency_conversion");
+const currency_conversion = require("../src/currency_conversion");
 const fs = require("fs");
 const nock = require("nock");
-const parse_pdf = require("./parse_pdf");
+const parse_pdf = require("../src/parse_pdf");
 const tape = require("tape");
-const utils = require("./utils");
+const utils = require("../src/utils");
 
 const response_from_currencylayer_com = fs.readFileSync(
-    __dirname + "/../test_resources/response_from_currencylayer_com.json",
+    __dirname + "/resources/response_from_currencylayer_com.json",
     "ASCII");
 
 const expected_pdf_parse_result = {
@@ -26,7 +26,7 @@ tape("number rounding", (t) => {
 
 tape("pdf parsing", (t) => {
     t.plan(1);
-    let actual_pdf_parse_result = parse_pdf.parse_pdf("./test_resources/Amazon_Invoice.pdf");
+    let actual_pdf_parse_result = parse_pdf.parse_pdf(__dirname + "/resources/Amazon_Invoice.pdf");
     t.deepEqual(actual_pdf_parse_result, expected_pdf_parse_result);
 });
 

@@ -43,8 +43,8 @@ function call_currencylayer(callback) {
  * @returns {number}
  */
 function usd_to_eur(usd_amount) {
-    let call_currencylayerAsync = bluebird.promisify(call_currencylayer);
-    return call_currencylayerAsync()
+    let call_currencylayer_async = bluebird.promisify(call_currencylayer);
+    return call_currencylayer_async()
         .then((json) => {
             if (json.success !== true) {
                 throw "Getting exchange rates from currencylayer.com was not successful. Returned JSON was: " + util.inspect(json);

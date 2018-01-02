@@ -5,7 +5,8 @@
   "main": "src/create_kululasku.js",
   "scripts": {
     "kululasku": "testcafe --debug-on-fail chrome src/create_kululasku.js",
-    "lint": "eslint 'src/create_kululasku.js'"
+    "lint": "eslint 'src/**/*.js' 'test/**/*.js'",
+    "test": "tape test/unit_tests.js"
   },
   "repository": "git@github.com:vpeurala/kulari-amazon-ostoksesta.git",
   "author": "Ville Peurala <ville.peurala@gmail.com>",
