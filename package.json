@@ -4,6 +4,7 @@
   "description": "Automatisoi kululaskun luomisen eTaskuun Amazon-ostoksesta.",
   "main": "src/create_kululasku.js",
   "scripts": {
+    "editorconfig-check": "editorconfig-tools check ./**/*.js",
     "kululasku": "testcafe --debug-on-fail chrome src/create_kululasku.js",
     "lint": "eslint 'src/**/*.js' 'test/**/*.js'",
     "test": "tape test/unit_tests.js"
@@ -18,6 +19,7 @@
     "testcafe": "^0.18.6"
   },
   "devDependencies": {
+    "editorconfig-tools": "^0.1.1",
     "eslint": "^4.14.0",
     "eslint-plugin-testcafe": "^0.2.1",
     "nock": "^9.1.5",
