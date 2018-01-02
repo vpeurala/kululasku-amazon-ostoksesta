@@ -1,11 +1,12 @@
 "use strict";
 
-const child_process = require("child_process");
+const childProcess = require("child_process");
 const moment = require("moment");
+const utils = require("./utils");
 
-function parse_pdf(pdf_file) {
-  let child_process_output = child_process.execSync("pdftotext " +
-    pdf_file + " - " +
+function parsePdf(pdfFile) {
+  let childProcessOutput = childProcess.execSync("pdftotext " +
+    pdfFile + " - " +
     "| grep -e 'Order Total:' -e 'Digital Order:' -e 'Items Ordered' " +
     "| sed 's/^.*Order Total: \\$//g' " +
     "| sed 's/^Digital Order: //g'" +
@@ -14,21 +15,21 @@ function parse_pdf(pdf_file) {
     "encoding": "ASCII",
     "timeout": 1000
   });
-  let child_process_output_lines = child_process_output.split("\n");
-  let price_in_usd_as_string = child_process_output_lines[0].trim();
-  let price_in_usd_as_float = parseFloat(parseFloat(price_in_usd_as_string).toFixed(2));
-  let purchase_date_in_wrong_format = child_process_output_lines[1].trim();
-  let purchase_date_in_correct_format =
-    moment(purchase_date_in_wrong_format, "MMMM D, YYYY")
+  let childProcessOutputLines = childProcessOutput.split("\n");
+  let priceInUsdAsString = childProcessOutputLines[0].trim();
+  let priceInUsdAsFloat = utils.numberToTwoDecimalAccuracy(parseFloat(priceInUsdAsString));
+  let purchaseDateInWrongFormat = childProcessOutputLines[1].trim();
+  let purchaseDateInCorrectFormat =
+    moment(purchaseDateInWrongFormat, "MMMM D, YYYY")
       .format("D.M.YYYY");
-  let product_name = child_process_output_lines[2].trim();
+  let productName = childProcessOutputLines[2].trim();
   return {
-    "price_in_usd": price_in_usd_as_float,
-    "product_name": product_name,
-    "purchase_date": purchase_date_in_correct_format
+    "priceInUsd": priceInUsdAsFloat,
+    "productName": productName,
+    "purchaseDate": purchaseDateInCorrectFormat
   };
 }
 
 module.exports = {
-  "parse_pdf": parse_pdf
+  "parsePdf": parsePdf
 };

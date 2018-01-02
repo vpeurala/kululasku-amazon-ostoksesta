@@ -6,10 +6,10 @@
  *
  * @param {number} input
  */
-function number_to_two_decimal_accuracy(input) {
-    return parseFloat(input.toFixed(2));
+function numberToTwoDecimalAccuracy(input) {
+  return parseFloat(input.toFixed(2));
 }
 
 module.exports = {
-    "number_to_two_decimal_accuracy": number_to_two_decimal_accuracy
+  "numberToTwoDecimalAccuracy": numberToTwoDecimalAccuracy
 };

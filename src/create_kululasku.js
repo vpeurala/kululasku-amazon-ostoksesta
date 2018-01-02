@@ -1,28 +1,28 @@
 "use strict";
 
-const etasku_front_page_url = "https://www.etasku.fi/";
+const ETASKU_FRONT_PAGE_URL = "https://www.etasku.fi/";
 const s = require("./selectors");
-const parse_pdf = require("./parse_pdf");
-const currency_conversion = require("./currency_conversion");
+const parsePdf = require("./parse_pdf");
+const currencyConversion = require("./currency_conversion");
 const username = process.env.ETASKU_USERNAME;
 const password = process.env.ETASKU_PASSWORD;
-const receipt_file = process.env.ETASKU_RECEIPT_FILE;
+const receiptFile = process.env.ETASKU_RECEIPT_FILE;
 
 fixture("etasku.fi");
 
-test.page(etasku_front_page_url)("Create kululasku", async (t) => {
-    let parsed_receipt = await parse_pdf.parse_pdf(receipt_file);
-    let price_in_eur = await currency_conversion.usd_to_eur(parsed_receipt.price_in_usd).toFixed(2);
+test.page(ETASKU_FRONT_PAGE_URL)("Create kululasku", async (t) => {
+    let parsedReceipt = await parsePdf.parsePdf(receiptFile);
+    let priceInEur = await currencyConversion.usdToEur(parsedReceipt.priceInUsd).toFixed(2);
     await t
       .click(s.kirjaudu)
       .typeText(s.kayttajatunnus, username, {"replace": true})
       .typeText(s.salasana, password, {"replace": true})
-      .click(s.kirjaudu_sisaan)
-      .click(s.luo_tosite)
+      .click(s.kirjauduSisaan)
+      .click(s.luoTosite)
       // Kuittitiedoston uploadaus.
-      .setFilesToUpload(s.lisaa_tiedosto, receipt_file)
+      .setFilesToUpload(s.lisaaTiedosto, receiptFile)
       // Ostopäivä-kenttä = input#date.tcal.tcalInput.
-      .typeText(s.ostopaiva, parsed_receipt.purchase_date, {
+      .typeText(s.ostopaiva, parsedReceipt.purchaseDate, {
         "paste": true,
         "replace": true
       })
@@ -32,15 +32,15 @@ test.page(etasku_front_page_url)("Create kululasku", async (t) => {
       .typeText(
         s.lisatietoa,
         "Ammattikirjallisuutta: \"" +
-        parsed_receipt.product_name +
+        parsedReceipt.productName +
         "\". USD " +
-        parsed_receipt.price_in_usd.toFixed(2).toString() +
+        parsedReceipt.priceInUsd.toFixed(2).toString() +
         " = " +
         "EUR " +
-        price_in_eur.toString() +
+        priceInEur.toString() +
         ".")
       // Hinta-kenttä (euroina) = input#show_price_edit.
-      .typeText(s.hinta, price_in_eur.toString())
+      .typeText(s.hinta, priceInEur.toString())
       // Verokanta-kenttä = select#taxrate_select; Amazonilta ostettaessa aina "24 %".
       .click(s.verokanta)
       .click(s.verokanta.find("option").withText("24 %"))

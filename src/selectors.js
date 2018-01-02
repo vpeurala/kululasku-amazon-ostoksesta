@@ -9,11 +9,11 @@ const kirjaudu = selector("ul.nav.navbar-nav.pull-right.hidden-xs a#navbar-login
 // Sisäänkirjautumissivu
 const kayttajatunnus = selector("input#username.textbox");
 const salasana = selector("input.textbox[type=password]");
-const kirjaudu_sisaan = selector("input.loginbutton");
+const kirjauduSisaan = selector("input.loginbutton");
 
 // Kululaskun syöttösivu
-const luo_tosite = selector("div#customertools.actionbutton");
-const lisaa_tiedosto = selector("#uploadifive-fileDropZone input[type=file]");
+const luoTosite = selector("div#customertools.actionbutton");
+const lisaaTiedosto = selector("#uploadifive-fileDropZone input[type=file]");
 const ostopaiva = selector("input#date.tcal.tcalInput");
 const ostopaikka = selector("input#receipt_name");
 const lisatietoa = selector("textarea#show_comment_edit");
@@ -31,9 +31,9 @@ module.exports = {
   "kirjaudu": kirjaudu,
   "kayttajatunnus": kayttajatunnus,
   "salasana": salasana,
-  "kirjaudu_sisaan": kirjaudu_sisaan,
-  "luo_tosite": luo_tosite,
-  "lisaa_tiedosto": lisaa_tiedosto,
+  "kirjauduSisaan": kirjauduSisaan,
+  "luoTosite": luoTosite,
+  "lisaaTiedosto": lisaaTiedosto,
   "ostopaiva": ostopaiva,
   "ostopaikka": ostopaikka,
   "lisatietoa": lisatietoa,

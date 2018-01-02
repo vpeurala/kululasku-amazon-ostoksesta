@@ -7,7 +7,7 @@ const utils = require("./utils");
 
 const CURRENCYLAYER_COM_API_KEY = "737e36a2d5d98271355df3729abbec59";
 
-function call_currencylayer(callback) {
+function callCurrencylayer(callback) {
   http.get({
     "hostname": "apilayer.net",
     "path": "/api/live?access_key=" + CURRENCYLAYER_COM_API_KEY + "&currencies=EUR&format=0",
@@ -40,24 +40,24 @@ function call_currencylayer(callback) {
  * Convert an amound of USD to equivalent amount of EUR.
  * TODO: Currently uses the current exchange rate. Should use the exchange rate of the purchase day.
  *
- * @param {number} usd_amount
+ * @param {number} usdAmount
  * @returns {number}
  */
-function usd_to_eur(usd_amount) {
-  let call_currencylayer_async = bluebird.promisify(call_currencylayer);
-  return call_currencylayer_async()
+function usdToEur(usdAmount) {
+  let callCurrencylayerAsync = bluebird.promisify(callCurrencylayer);
+  return callCurrencylayerAsync()
     .then((json) => {
       if (json.success !== true) {
         throw "Getting exchange rates from currencylayer.com was not successful. Returned JSON was: " +
         util.inspect(json);
       }
-      let exchange_rate = json.quotes.USDEUR;
-      let eur_amount_with_too_many_decimals = exchange_rate * usd_amount;
-      return utils.number_to_two_decimal_accuracy(eur_amount_with_too_many_decimals);
+      let exchangeRate = json.quotes.USDEUR;
+      let eurAmountRaw = exchangeRate * usdAmount;
+      return utils.numberToTwoDecimalAccuracy(eurAmountRaw);
     });
 }
 
 module.exports = {
   "CURRENCYLAYER_COM_API_KEY": CURRENCYLAYER_COM_API_KEY,
-  "usd_to_eur": usd_to_eur
+  "usdToEur": usdToEur
 };
