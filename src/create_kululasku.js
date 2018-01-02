@@ -29,7 +29,16 @@ test.page(etasku_front_page_url)("Create kululasku", async (t) => {
       // Ostopaikka-kenttä = input#receipt_name.
       .typeText(s.ostopaikka, "amazon.com")
       // Lisätietoa-kenttä = textarea#show_comment_edit.
-      .typeText(s.lisatietoa, "Ammattikirjallisuutta: '" + parsed_receipt.product_name + "'. USD " + parsed_receipt.price_in_usd.toFixed(2).toString() + " = " + "EUR " + price_in_eur.toString() + ".")
+      .typeText(
+        s.lisatietoa,
+        "Ammattikirjallisuutta: \"" +
+        parsed_receipt.product_name +
+        "\". USD " +
+        parsed_receipt.price_in_usd.toFixed(2).toString() +
+        " = " +
+        "EUR " +
+        price_in_eur.toString() +
+        ".")
       // Hinta-kenttä (euroina) = input#show_price_edit.
       .typeText(s.hinta, price_in_eur.toString())
       // Verokanta-kenttä = select#taxrate_select; Amazonilta ostettaessa aina "24 %".

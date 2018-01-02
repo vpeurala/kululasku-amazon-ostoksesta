@@ -12,9 +12,14 @@ const response_from_currencylayer_com = fs.readFileSync(
   "ASCII");
 
 const expected_pdf_parse_result = {
-  "price_in_usd": 22.75,
-  "product_name": "PostgreSQL: Up and Running: A Practical Guide to the Advanced Open Source Database[Kindle Edition] By: Regina O. Obe, Leo S. Hsu",
-  "purchase_date": "14.12.2017"
+  "price_in_usd":
+    22.75,
+  "product_name":
+  "PostgreSQL: Up and Running: A Practical Guide to the Advanced Open Source Database[Kindle Edition]" +
+  " " +
+  "By: Regina O. Obe, Leo S. Hsu",
+  "purchase_date":
+    "14.12.2017"
 };
 
 tape("number rounding", (t) => {
