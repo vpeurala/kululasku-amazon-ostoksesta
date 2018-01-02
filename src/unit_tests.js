@@ -1,6 +1,5 @@
 "use strict";
 
-const bluebird = require("bluebird");
 const currency_conversion = require("./currency_conversion");
 const fs = require("fs");
 const nock = require("nock");
