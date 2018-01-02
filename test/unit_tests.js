@@ -25,7 +25,8 @@ const expectedPdfParseResult = {
 tape("number rounding", (t) => {
   t.plan(1);
   let expected = 13.37;
-  let actual = utils.numberToTwoDecimalAccuracy(13.368913453128);
+  let inputToRounding = 13.368913453128;
+  let actual = utils.numberToTwoDecimalAccuracy(inputToRounding);
   t.equal(actual, expected);
 });
 

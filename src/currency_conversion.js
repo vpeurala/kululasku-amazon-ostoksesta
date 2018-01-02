@@ -40,8 +40,8 @@ function callCurrencylayer(callback) {
  * Convert an amound of USD to equivalent amount of EUR.
  * TODO: Currently uses the current exchange rate. Should use the exchange rate of the purchase day.
  *
- * @param {number} usdAmount
- * @returns {number}
+ * @param {number} usdAmount an amount of USD.
+ * @returns {Promise<number>} an equivalent amount of EUR, as a Promise.
  */
 function usdToEur(usdAmount) {
   let callCurrencylayerAsync = bluebird.promisify(callCurrencylayer);
