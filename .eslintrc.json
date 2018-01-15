@@ -33,6 +33,7 @@
       }
     ],
     "new-cap": "error",
+    "no-console": "off",
     "no-else-return": "off",
     "no-magic-numbers": [
       "error",
