@@ -1,18 +1,79 @@
 "use strict";
 
+const { execSync } = require("child_process");
+const fs = require("fs");
+
 const ETASKU_FRONT_PAGE_URL = "https://www.etasku.fi/";
-const s = require("./selectors");
-const parsePdf = require("./parse_pdf");
+
 const currencyConversion = require("./currency_conversion");
+const parsePdf = require("./parse_pdf");
+const s = require("./selectors");
+
 const username = process.env.ETASKU_USERNAME;
 const password = process.env.ETASKU_PASSWORD;
 const receiptFile = process.env.ETASKU_RECEIPT_FILE;
 
+function usage() {
+  console.log("Usage:");
+  console.log("  ETASKU_USERNAME=<ETASKU_USERNAME> ETASKU_PASSWORD=<ETASKU_PASSWORD> ETASKU_RECEIPT_FILE=<INVOICE_PDF_FILE_FROM_AMAZON> yarn kululasku");
+  console.log("Example: ");
+  console.log("  ETASKU_USERNAME='ville.peurala@wunderdog.fi' ETASKU_PASSWORD='Mansikka2' ETASKU_RECEIPT_FILE='/Users/vpeurala/Documents/Wunderdog_kularit/2017_12_30/Autotools.pdf' yarn kululasku");
+}
+
+if (username === undefined) {
+  console.log("Missing required environment variable ETASKU_USERNAME (your username to 'https://www.etasku.fi' service).");
+  usage();
+  process.exit(1);
+}
+
+if (password === undefined) {
+  console.log("Missing required environment variable ETASKU_PASSWORD (your password to 'https://www.etasku.fi' service).");
+  usage();
+  process.exit(1);
+}
+
+if (receiptFile === undefined) {
+  console.log("Missing required environment variable ETASKU_RECEIPT_FILE (the invoice file downloaded from Amazon, in PDF format).");
+  usage();
+  process.exit(1);
+}
+
+fs.access(receiptFile, fs.constants.F_OK, (err) => {
+  console.log(`The speficied Amazon Invoice PDF file ${receiptFile} does not exist. Error code: ${err.code}`);
+  console.log("Make sure that the path to the file is correct. Use an \\e[1mabsolute\\e[0m path if you have no luck with relative paths.");
+  console.log("An absolute path means a path all the way from the root directory. Examples:");
+  console.log("  (MacOS):   /Users/vpeurala/Desktop/TODO/Kirjakularit/Serious_Cryptography.pdf");
+  console.log("  (Windows): C:\\Users\\vpeurala\\Desktop\\TODO\\Kirjakularit\\Serious_Cryptography.pdf")
+  process.exit(1);
+});
+
+fs.access(receiptFile, fs.constants.R_OK, (err) => {
+  console.log(`The speficied Amazon Invoice PDF file ${receiptFile} could not be read. Error code: ${err.code}`);
+  console.log("The current process does not have read access to the file.");
+  process.exit(1);
+});
+
+try {
+  execSync("which pdftotext", {
+    "encoding": "ASCII",
+    "timeout": 1000
+  });
+} catch (error) {
+  console.log("Command 'which pdftotext' produced error: ", error);
+  console.log("Probably pdftotext is missing from PATH.");
+  process.exit(1);
+}
+
 fixture("etasku.fi");
 
 test.page(ETASKU_FRONT_PAGE_URL)("Create kululasku", async (t) => {
-    let parsedReceipt = await parsePdf.parsePdf(receiptFile);
-    let priceInEur = await currencyConversion.usdToEur(parsedReceipt.priceInUsd).toFixed(2);
+    let parsedReceipt = await parsePdf
+      .parsePdf(receiptFile);
+    let priceInEur = await currencyConversion
+      .usdToEur(
+        parsedReceipt.priceInUsd,
+        parsedReceipt.purchaseDateInCurrencyLayerFormat)
+      .toFixed(2);
     await t
       .click(s.kirjaudu)
       .typeText(s.kayttajatunnus, username, {"replace": true})
@@ -22,10 +83,11 @@ test.page(ETASKU_FRONT_PAGE_URL)("Create kululasku", async (t) => {
       // Kuittitiedoston uploadaus.
       .setFilesToUpload(s.lisaaTiedosto, receiptFile)
       // Ostopäivä-kenttä = input#date.tcal.tcalInput.
-      .typeText(s.ostopaiva, parsedReceipt.purchaseDate, {
+      .typeText(s.ostopaiva, parsedReceipt.purchaseDateInETaskuFormat, {
         "paste": true,
         "replace": true
       })
+      .debug()
       // Ostopaikka-kenttä = input#receipt_name.
       .typeText(s.ostopaikka, "amazon.com")
       // Lisätietoa-kenttä = textarea#show_comment_edit.
