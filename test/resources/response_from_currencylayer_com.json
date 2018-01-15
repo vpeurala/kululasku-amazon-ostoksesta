@@ -2,9 +2,11 @@
   "success": true,
   "terms": "https://currencylayer.com/terms",
   "privacy": "https://currencylayer.com/privacy",
-  "timestamp": 1514679558,
+  "historical": true,
+  "date": "2018-01-06",
+  "timestamp": 1515283199,
   "source": "USD",
   "quotes": {
-    "USDEUR": 0.833204
+    "USDEUR": 0.831104
   }
 }
