@@ -19,14 +19,18 @@ function parsePdf(pdfFile) {
   let priceInUsdAsString = childProcessOutputLines[0].trim();
   let priceInUsdAsFloat = utils.numberToTwoDecimalAccuracy(parseFloat(priceInUsdAsString));
   let purchaseDateInWrongFormat = childProcessOutputLines[1].trim();
-  let purchaseDateInCorrectFormat =
+  let purchaseDateInCurrencyLayerFormat =
+    moment(purchaseDateInWrongFormat, "MMMM D, YYYY")
+      .format("YYYY-MM-DD");
+  let purchaseDateInETaskuFormat =
     moment(purchaseDateInWrongFormat, "MMMM D, YYYY")
       .format("D.M.YYYY");
   let productName = childProcessOutputLines[2].trim();
   return {
     "priceInUsd": priceInUsdAsFloat,
     "productName": productName,
-    "purchaseDate": purchaseDateInCorrectFormat
+    "purchaseDateInCurrencylayerFormat": purchaseDateInCurrencyLayerFormat,
+    "purchaseDateInETaskuFormat": purchaseDateInETaskuFormat
   };
 }
 
