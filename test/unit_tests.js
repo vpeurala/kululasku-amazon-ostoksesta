@@ -18,7 +18,9 @@ const expectedPdfParseResult = {
   "PostgreSQL: Up and Running: A Practical Guide to the Advanced Open Source Database[Kindle Edition]" +
   " " +
   "By: Regina O. Obe, Leo S. Hsu",
-  "purchaseDate":
+  "purchaseDateInCurrencylayerFormat":
+    "2017-12-14",
+  "purchaseDateInETaskuFormat":
     "14.12.2017"
 };
 
@@ -40,14 +42,15 @@ tape("currency conversion", async (t) => {
   t.plan(1);
   nock.disableNetConnect();
   nock("http://apilayer.net")
-    .get("/api/live")
+    .get("/api/historical")
     .query({
       "access_key": currencyConversion.CURRENCYLAYER_COM_API_KEY,
       "currencies": "EUR",
+      "date": "2018-01-06",
       "format": 0
     })
     .reply(200, responseFromCurrencylayerCom);
-  let expected = 18.96;
-  let actual = await currencyConversion.usdToEur(expectedPdfParseResult.priceInUsd);
+  let expected = 18.91;
+  let actual = await currencyConversion.usdToEur(expectedPdfParseResult.priceInUsd, "2018-01-06");
   t.equal(expected, actual);
 });
