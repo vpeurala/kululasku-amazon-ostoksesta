@@ -7,10 +7,13 @@ const utils = require("./utils");
 
 const CURRENCYLAYER_COM_API_KEY = "737e36a2d5d98271355df3729abbec59";
 
-function callCurrencylayer(callback) {
+function callCurrencylayer(formattedDate, callback) {
   http.get({
     "hostname": "apilayer.net",
-    "path": "/api/live?access_key=" + CURRENCYLAYER_COM_API_KEY + "&currencies=EUR&format=0",
+    "path": "/api/historical?access_key=" + CURRENCYLAYER_COM_API_KEY +
+    "&date=" + formattedDate +
+    "&currencies=EUR" +
+    "&format=0",
     "timeout": 3000
   }, (response) => {
     if (response.statusCode !== 200) {
@@ -37,15 +40,15 @@ function callCurrencylayer(callback) {
 }
 
 /**
- * Convert an amound of USD to equivalent amount of EUR.
- * TODO: Currently uses the current exchange rate. Should use the exchange rate of the purchase day.
+ * Convert an amound of USD to equivalent amount of EUR. Uses the conversion rate of the purchase date.
  *
- * @param {number} usdAmount an amount of USD.
+ * @param {number} usdAmount    - the purchase price in USD, for example 22.75.
+ * @param {string} purchaseDate - the purchase date formatted as YYYY-MM-DD, for example "2018-01-06".
  * @returns {Promise<number>} an equivalent amount of EUR, as a Promise.
  */
-function usdToEur(usdAmount) {
+function usdToEur(usdAmount, purchaseDate) {
   let callCurrencylayerAsync = bluebird.promisify(callCurrencylayer);
-  return callCurrencylayerAsync()
+  return callCurrencylayerAsync(purchaseDate)
     .then((json) => {
       if (json.success !== true) {
         throw "Getting exchange rates from currencylayer.com was not successful. Returned JSON was: " +
