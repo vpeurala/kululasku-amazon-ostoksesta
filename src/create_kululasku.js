@@ -15,25 +15,34 @@ const receiptFile = process.env.AMAZON_INVOICE_PDF;
 
 function usage() {
   console.log("Usage:");
-  console.log("  ETASKU_USERNAME=<ETASKU_USERNAME> ETASKU_PASSWORD=<ETASKU_PASSWORD> AMAZON_INVOICE_PDF=<AMAZON_INVOICE_PDF> yarn kululasku");
+  console.log("  ETASKU_USERNAME=<ETASKU_USERNAME> " +
+    "ETASKU_PASSWORD=<ETASKU_PASSWORD> " +
+    "AMAZON_INVOICE_PDF=<AMAZON_INVOICE_PDF> " +
+    "yarn kululasku");
   console.log("Example: ");
-  console.log("  ETASKU_USERNAME='ville.peurala@wunderdog.fi' ETASKU_PASSWORD='Mansikka2' AMAZON_INVOICE_PDF='/Users/vpeurala/Documents/Wunderdog_kularit/2017_12_30/Autotools.pdf' yarn kululasku");
+  console.log("  ETASKU_USERNAME='ville.peurala@wunderdog.fi' " +
+    "ETASKU_PASSWORD='Mansikka2' " +
+    "AMAZON_INVOICE_PDF='/Users/vpeurala/Documents/Wunderdog_kularit/2017_12_30/Autotools.pdf' " +
+    "yarn kululasku");
 }
 
 if (username === undefined) {
-  console.log("Missing required environment variable ETASKU_USERNAME (your username to 'https://www.etasku.fi' service).");
+  console.log("Missing required environment variable ETASKU_USERNAME " +
+    "(your username to 'https://www.etasku.fi' service).");
   usage();
   process.exit(1);
 }
 
 if (password === undefined) {
-  console.log("Missing required environment variable ETASKU_PASSWORD (your password to 'https://www.etasku.fi' service).");
+  console.log("Missing required environment variable ETASKU_PASSWORD " +
+    "(your password to 'https://www.etasku.fi' service).");
   usage();
   process.exit(1);
 }
 
 if (receiptFile === undefined) {
-  console.log("Missing required environment variable AMAZON_INVOICE_PDF (the invoice file downloaded from Amazon, in PDF format).");
+  console.log("Missing required environment variable AMAZON_INVOICE_PDF " +
+    "(the invoice file downloaded from Amazon, in PDF format).");
   usage();
   process.exit(1);
 }
@@ -41,7 +50,8 @@ if (receiptFile === undefined) {
 fs.access(receiptFile, fs.constants.F_OK, (err) => {
   if (err) {
     console.log(`The speficied Amazon Invoice PDF file '${receiptFile}' does not exist. Error code: '${err.code}'`);
-    console.log("Make sure that the path to the file is correct. Use an \\e[1mabsolute\\e[0m path if you have no luck with relative paths.");
+    console.log("Make sure that the path to the file is correct. " +
+      "Use an \\e[1mabsolute\\e[0m path if you have no luck with relative paths.");
     console.log("An absolute path means a path all the way from the root directory. Examples:");
     console.log("  (MacOS):   /Users/vpeurala/Desktop/TODO/Kirjakularit/Serious_Cryptography.pdf");
     console.log("  (Windows): C:\\Users\\vpeurala\\Desktop\\TODO\\Kirjakularit\\Serious_Cryptography.pdf");
