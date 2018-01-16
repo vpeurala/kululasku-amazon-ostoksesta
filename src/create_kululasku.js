@@ -99,6 +99,7 @@ test.page(ETASKU_FRONT_PAGE_URL)("Create kululasku", async (t) => {
     // Hinta-kenttä (euroina) = input#show_price_edit.
     .typeText(s.hinta, priceInEur.toString())
     // Verokanta-kenttä = select#taxrate_select; Amazonilta ostettaessa aina "24 %".
+    // TODO: Extract this "click dropbox -> click and find" -pattern to its own function.
     .click(s.verokanta)
     .click(s.verokanta.find("option").withText("24 %"))
     // Luokitus-kenttä = select#class_select; kirjaostoksissa "Työkalut".
