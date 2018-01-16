@@ -9,17 +9,25 @@ Sunnuntaina 31.12.2017 tätä kokeiltiin ensimmäistä kertaa "tuotantokäytöss
 Sinun pitää asettaa seuraavat ympäristömuuttujat ajon yhteydessä:
 * ETASKU_USERNAME = käyttäjätunnuksesi eTaskuun.
 * ETASKU_PASSWORD = salasanasi eTaskuun.
-* ETASKU_RECEIPT_FILE = kuittitiedosto, pdf-muodossa.
+* AMAZON_INVOICE_PDF = Amazonilta saatu kuittitiedosto, pdf-muodossa.
 
 Omalla koneella pitää olla pdftotext asennettuna.
 
-Esimerkki käytöstä:
+Esimerkki käytöstä, kaikki ympäristömuuttujat asetetaan ajon yhteydessä:
 
-`ETASKU_USERNAME='ville.peurala@wunderdog.fi' ETASKU_PASSWORD='Mansikka2' ETASKU_RECEIPT_FILE='/Users/vpeurala/Documents/Wunderdog_kularit/2017_12_30/Autotools.pdf' yarn kululasku`
+`ETASKU_USERNAME='ville.peurala@wunderdog.fi' ETASKU_PASSWORD='Mansikka2' AMAZON_INVOICE_PDF='/Users/vpeurala/Documents/Wunderdog_kularit/2017_12_30/Autotools.pdf' yarn kululasku`
+
+Koska käyttäjätunnuksesi ja salasanasi [eTaskuun](https://etasku.fi/) eivät muutu joka kerta, toisin kuin kuittitiedosto, voit
+periaatteessa asettaa ne kerran ja sen jälkeen sinun täytyy antaa enää kuittitiedoston nimi erikseen:
+
+`export ETASKU_USERNAME='ville.peurala@wunderdog.fi'`
+`export ETASKU_PASSWORD='Mansikka2'`
+
+Nyt voit ajaa monta laskua:
+
+`AMAZON_INVOICE_PDF='/Users/vpeurala/Documents/Wunderdog_kularit/2017_12_30/Autotools.pdf' yarn kululasku`
 
 TODO:
-* Käytä nockia yksikkötestejä ajaessa ettei currencylayer.comin kuukausittainen quota kulu testiajoihin.
 * Pysäytä prosessi heti jos PDF:n parsinnassa tapahtuu jokin virhe.
 * Tarkista ohjelmallisesti heti prosessin alussa, löytyykö käyttäjän koneelta kaikki tarvittavat palikat (esim. pdftotext).
 * Toistaiseksi testattu vain Macilla, pitäisi kokeilla myös Linuxilla ja Windowsilla.
-* Hae valuuttakurssi (USD <-> EUR) ostopäivän mukaan.

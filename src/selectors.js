@@ -12,6 +12,7 @@ const salasana = selector("input.textbox[type=password]");
 const kirjauduSisaan = selector("input.loginbutton");
 
 // Kululaskun syöttösivu
+const bugiLaatikko = selector("input#date.tcal.tcalInput.tcalActive");
 const luoTosite = selector("div#customertools.actionbutton");
 const lisaaTiedosto = selector("#uploadifive-fileDropZone input[type=file]");
 const ostopaiva = selector("input#date.tcal.tcalInput");
@@ -29,6 +30,7 @@ const tallenna = selector("input#save_button");
 
 module.exports = {
   "alue": alue,
+  "bugiLaatikko": bugiLaatikko,
   "hinta": hinta,
   "kayttajatunnus": kayttajatunnus,
   "kirjaudu": kirjaudu,
