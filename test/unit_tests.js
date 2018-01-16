@@ -12,6 +12,8 @@ const responseFromCurrencylayerCom = fs.readFileSync(
   "ASCII");
 
 const expectedPdfParseResult = {
+  "orderNumber":
+    "D01-0575136-8633850",
   "priceInUsd":
     22.75,
   "productName":

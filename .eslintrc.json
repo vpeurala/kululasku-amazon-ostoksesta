@@ -60,7 +60,10 @@
     ],
     "quotes": [
       "error",
-      "double"
+      "double",
+      {
+        "allowTemplateLiterals": true
+      }
     ],
     "require-jsdoc": "off",
     "semi": [
