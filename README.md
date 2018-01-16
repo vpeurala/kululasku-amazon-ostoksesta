@@ -1,4 +1,4 @@
-# Kululasku-Amazon-ostoksesta
+# Kululasku Amazon-ostoksesta
 
 Automatisoi kululaskun luonnin [eTaskuun](https://etasku.fi/) Amazon-ostoksesta.
 
