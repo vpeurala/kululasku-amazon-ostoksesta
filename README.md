@@ -13,6 +13,10 @@ Sinun pitää asettaa seuraavat ympäristömuuttujat ajon yhteydessä:
 
 Omalla koneella pitää olla pdftotext asennettuna.
 
+MacOS:lle sen saa (Homebrewillä) näin:
+
+    brew install poppler
+
 Esimerkki käytöstä, kaikki ympäristömuuttujat asetetaan ajon yhteydessä:
 
     ETASKU_USERNAME='ville.peurala@wunderdog.fi' ETASKU_PASSWORD='Mansikka2' AMAZON_INVOICE_PDF='/Users/vpeurala/Documents/Wunderdog_kularit/2017_12_30/Autotools.pdf' yarn kululasku
