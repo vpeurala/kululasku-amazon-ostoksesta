@@ -1,0 +1,16 @@
+os:
+  - osx
+language: node_js
+node_js:
+  - "node"
+  - "lts/*"
+  - "8"
+cache: yarn
+before_install:
+  - brew install poppler
+before_script:
+  - yarn install
+script:
+  - yarn editorconfig-check
+  - yarn lint
+  - yarn test
