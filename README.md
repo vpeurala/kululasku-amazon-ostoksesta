@@ -14,7 +14,7 @@ TODO: Video tähän
 
 1. Sinulla pitää olla asennettuna (ja löytyä PATH:ista) sellainen komento kuin **pdftotext**. Sillä muunnetaan Amazonilta saatu PDF-kuitti tekstimuotoon, jotta siitä voidaan parsia tarvittava data. Ainakin MacOS:lla **pdftotext** on osa **Poppler**-nimistä ohjelmistoa. Helpoin tapa asentaa se on [Homebrewillä](https://brew.sh/):
 
-    brew install poppler
+    `brew install poppler`
 
    Sinulla täytyy olla _täsmälleen_ oikea versio **pdftotext**-ohjelmasta, muuten Amazonin PDF-kuitin parsinta luultavasti epäonnistuu. Tätä kirjoitettaessa se on **0.62.0**. Asenna **Poppler**:ista versio **0.62.0**, niin saat mukana oikean version myös **pdftotext**:istä.
 
