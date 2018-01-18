@@ -31,9 +31,4 @@ Nyt voit ajaa monta laskua:
 
     AMAZON_INVOICE_PDF='/Users/vpeurala/Documents/Wunderdog_kularit/2017_12_30/Autotools.pdf' yarn kululasku
 
-TODO:
-=====
-* Pysäytä prosessi heti jos PDF:n parsinnassa tapahtuu jokin virhe.
-* Tarkista ohjelmallisesti heti prosessin alussa, löytyykö käyttäjän koneelta kaikki tarvittavat palikat (esim. pdftotext).
-* Toistaiseksi testattu vain Macilla, pitäisi kokeilla myös Linuxilla ja Windowsilla. Testaa muutenkin lisää.
-* Jätä fixture ja test pois, jos mahdollista - tämä ei ole testi, vaan tapa automatisoida selainworkflow TestCafeta apuna käyttäen.
+### This tool has only been tested on MacOS (High Sierra, 10.13.2). It probably doesn't work on Linux or Windows out of the box - contributions from users of those operating systems are welcome!
