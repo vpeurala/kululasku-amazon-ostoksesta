@@ -75,4 +75,4 @@ Sunnuntaina 31.12.2017 tätä kokeiltiin ensimmäistä kertaa tuotantokäytöss�
 
 Yksi kuitti ei mennyt läpi. Kun tutkin sitä tarkemmin, huomasin, että siitä puuttui sellaisia tietoja joita muissa oli. Tämä kyseinen kuitti oli sellaisesta kirjasta, jonka olin ostanut ihan äsken. Hypoteesini on, että Amazonissa kuitit muodostuvat jotenkin "vaiheittain" siten, että ostoshetkestä kestää jonkin aikaa ennen kuin kuitti on valmis (sellaisessa muodossa, mitä me tarvitsemme). Kannattaa varmaan odottaa vaikka pari tuntia ostohetkestä ennen kuin tekee kululaskut.
 
-### Tätä työkalua on käytetty ainoastaan MacOS:lla (High Sierra, 10.13.2). Se ei luultavasti toimi Linuxilla tai Windowsilla suoraan, ilman muutoksia. Kontribuutiot Linux- tai Windows-käyttäjiltä ovat enemmän kuin tervetulleita!
+### Tätä työkalua on käytetty ainoastaan MacOS:lla (High Sierra, 10.13.2). Se ei luultavasti toimi Linuxilla tai Windowsilla suoraan ilman muutoksia. Kontribuutiot Linux- tai Windows-käyttäjiltä ovat enemmän kuin tervetulleita!
