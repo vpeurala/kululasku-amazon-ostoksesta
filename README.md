@@ -1,6 +1,6 @@
 # Kululasku Amazon-ostoksesta
 
-Tämä ohjelma automatisoi osittain kululaskun luonnin [eTaskuun](https://etasku.fi/) Amazon-ostoksesta.
+Tämä ohjelma automatisoi osittain kululaskun luonnin [eTaskuun](https://etasku.fi/) [Amazon](https://www.amazon.com/)-ostoksesta.
 
 Sinun pitää manuaalisesti hakea ostoksestasi PDF-kuitti Amazonista. Alla oleva opetusvideo näyttää, miten se tapahtuu. Sen jälkeen tämä skripti hoitaa loput.
 
