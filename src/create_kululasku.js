@@ -104,47 +104,30 @@ test.page(ETASKU_FRONT_PAGE_URL)("Create kululasku", async (t) => {
     .typeText(s.salasana, password, {"replace": true})
     .click(s.kirjauduSisaan)
     .click(s.luoTosite)
-    // Kuittitiedoston uploadaus.
     .setFilesToUpload(s.lisaaTiedosto, receiptFile)
-    // Ostopäivä-kenttä = input#date.tcal.tcalInput.
     .typeText(s.ostopaiva, parsedReceipt.purchaseDateInETaskuFormat, {
       "paste": true,
       "replace": true
     })
     // Sulje laatikko, joka aukeaa Ostopaikka-kentän päälle - tämä lienee bugi eTasku.fi:ssä.
     .click(s.bugiLaatikko, {})
-    // Ostopaikka-kenttä = input#receipt_name.
     .typeText(s.ostopaikka, "www.amazon.com")
-    // Lisätietoa-kenttä = textarea#show_comment_edit.
     .typeText(s.lisatietoa, extraInformationField(parsedReceipt, priceInEur))
-    // Hinta-kenttä (euroina) = input#show_price_edit.
-    .typeText(s.hinta, priceInEur.toString())
-    // Verokanta-kenttä = select#taxrate_select; Amazonilta ostettaessa aina "24 %".
-    // TODO: Extract this "click dropbox -> click and find" -pattern to its own function.
-    .click(s.verokanta)
-    .click(s.verokanta.find("option").withText("24 %"))
-    // Luokitus-kenttä = select#class_select; kirjaostoksissa "Työkalut".
-    .click(s.luokitus)
-    .click(s.luokitus.find("option").withText("Työkalut"))
-    // Maksutapa-kenttä = select#paymethod_select; Amazonilta ostettaessa ainakin minulla aina "Luottokortti".
-    .click(s.maksutapa)
-    .click(s.maksutapa.find("option").withText("Luottokortti"))
-    // Kustannuspaikka-kenttä = select#Kustannuspaikka_select.dimensiongroup_select; aina "1999 Liiketoiminta".
-    .click(s.kustannuspaikka)
-    .click(s.kustannuspaikka
-      .find("option").withText("1999 Liiketoiminta"))
-    // Toimiala-kenttä = select#Toimiala_select.dimensiongroup_select; aina "IT IT".
-    .click(s.toimiala)
-    .click(s.toimiala
-      .find("option").withText("IT IT"))
-    // Alue-kenttä = select#Alue_select.dimensiongroup_select; aina "10091 Helsinki".
-    .click(s.alue)
-    .click(s.alue.find("option").withText("10091 Helsinki"))
-    // Palvelu-kenttä = select#Palvelu_select.dimensiongroup_select; aina "KON Konsultointi".
-    .click(s.palvelu)
-    .click(s.palvelu.find("option").withText("KON Konsultointi"))
-    // Tositenippu-kenttä jätetään default-arvoon "Ei valittu".
-    .click(s.tallenna);
+    .typeText(s.hinta, priceInEur.toString());
+  await selectOption(t, s.verokanta, "24 %");
+  await selectOption(t, s.luokitus, "Työkalut");
+  await selectOption(t, s.maksutapa, "Luottokortti");
+  await selectOption(t, s.kustannuspaikka, "1999 Liiketoiminta");
+  await selectOption(t, s.toimiala, "IT IT");
+  await selectOption(t, s.alue, "10091 Helsinki");
+  await selectOption(t, s.palvelu, "KON Konsultointi");
+  await t.click(s.tallenna);
+
+  async function selectOption(t, selectElementSelector, optionText) {
+    await t
+      .click(selectElementSelector)
+      .click(selectElementSelector.find("option").withText(optionText));
+  }
 
   function extraInformationField(parsedReceipt, priceInEur) {
     return `Ammattikirjallisuutta: "${parsedReceipt.productName}".\n
