@@ -10,8 +10,8 @@ before_install:
   - brew install yarn
 before_script:
   - yarn install
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc_test_reporter
-  - chmod +x ./cc-test-reporter
+  - curl -v -L -o cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64
+  - chmod +x cc-test-reporter
   - ./cc-test-reporter before-build
 script:
   - yarn editorconfig-check
