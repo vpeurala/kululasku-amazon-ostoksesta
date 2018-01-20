@@ -106,6 +106,23 @@ tape("currency conversion, malformed JSON", async (t) => {
   }
 });
 
+tape("currency conversion, broken response", async (t) => {
+  t.plan(1);
+  nock.disableNetConnect();
+  nock("http://apilayer.net")
+    .get("/api/historical")
+    .query(CURRENCYLAYER_COM_QUERY_PARAMETERS)
+    .replyWithError("broken response");
+  try {
+    await currencyConversion.usdToEur(EXPECTED_PDF_PARSE_RESULT.priceInUsd, "2018-01-06");
+    t.fail("An exception should have been thrown.");
+  } catch (error) {
+    const expectedErrorMessage = "Getting exchange rates from currencylayer.com was not successful. Error was: Error: broken response";
+    let actualErrorMessage = error.message;
+    t.equal(actualErrorMessage.substring(0, expectedErrorMessage.length), expectedErrorMessage);
+  }
+});
+
 function readTestResource(filename) {
   let resourcePath = __dirname + "/resources/" + filename;
   return fs.readFileSync(resourcePath, "ASCII");
