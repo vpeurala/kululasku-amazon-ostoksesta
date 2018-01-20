@@ -1,0 +1,5 @@
+instrumentation:
+    excludes: [
+        "src/create_kululasku.js",
+        "src/selectors.js"
+    ]
