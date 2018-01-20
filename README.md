@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/vpeurala/kululasku-amazon-ostoksesta.svg?branch=master)](https://travis-ci.org/vpeurala/kululasku-amazon-ostoksesta)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5f3e5e48a34203dffff9/maintainability)](https://codeclimate.com/github/vpeurala/kululasku-amazon-ostoksesta/maintainability)
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/5f3e5e48a34203dffff9/test_coverage)](https://codeclimate.com/github/vpeurala/kululasku-amazon-ostoksesta/test_coverage)
 
 Tämä ohjelma automatisoi osittain kululaskun luonnin [eTaskuun](https://etasku.fi/) [Amazon](https://www.amazon.com/)-ostoksesta.
 
