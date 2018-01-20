@@ -1,6 +1,6 @@
 # Kululasku Amazon-ostoksesta
 
-![Travis Build Status](https://travis-ci.org/vpeurala/kululasku-amazon-ostoksesta.svg?branch=master)
+[![Build Status](https://travis-ci.org/vpeurala/kululasku-amazon-ostoksesta.svg?branch=master)](https://travis-ci.org/vpeurala/kululasku-amazon-ostoksesta)
 
 Tämä ohjelma automatisoi osittain kululaskun luonnin [eTaskuun](https://etasku.fi/) [Amazon](https://www.amazon.com/)-ostoksesta.
 
