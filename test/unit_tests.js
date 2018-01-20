@@ -89,6 +89,23 @@ tape("currency conversion, internal server error", async (t) => {
   }
 });
 
+tape("currency conversion, malformed JSON", async (t) => {
+  t.plan(1);
+  nock.disableNetConnect();
+  nock("http://apilayer.net")
+    .get("/api/historical")
+    .query(CURRENCYLAYER_COM_QUERY_PARAMETERS)
+    .reply(200, "Malformed response body; this is not JSON.");
+  try {
+    await currencyConversion.usdToEur(EXPECTED_PDF_PARSE_RESULT.priceInUsd, "2018-01-06");
+    t.fail("An exception should have been thrown.");
+  } catch (error) {
+    const expectedErrorMessage = "Unexpected token M in JSON at position 0";
+    let actualErrorMessage = error.message;
+    t.equal(actualErrorMessage, expectedErrorMessage);
+  }
+});
+
 function readTestResource(filename) {
   let resourcePath = __dirname + "/resources/" + filename;
   return fs.readFileSync(resourcePath, "ASCII");

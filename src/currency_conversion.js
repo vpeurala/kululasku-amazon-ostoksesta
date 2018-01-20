@@ -41,8 +41,7 @@ function callCurrencylayer(formattedDate, callback) {
     });
   }).on("error", (error) => {
     callback(
-      "Getting exchange rates from currencylayer.com was not successful. Error was: " + util.inspect(error),
-      null);
+      "Getting exchange rates from currencylayer.com was not successful. Error was: " + util.inspect(error));
   });
 }
 
