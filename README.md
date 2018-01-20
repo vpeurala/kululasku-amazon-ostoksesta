@@ -77,7 +77,7 @@ TODO: Video tähän
 
     AMAZON_INVOICE_PDF='/Users/vpeurala/Desktop/Serious_Cryptography.pdf' yarn kululasku
 
-## Tähänastinen testaushistoria
+## Tähänastinen tuotantokäyttöhistoria (21.1.2018)
 
 Sunnuntaina 31.12.2017 tätä kokeiltiin ensimmäistä kertaa tuotantokäytössä. Minulla oli silloin viisi kirjaa, joista minun piti tehdä kululaskut. Viidestä kuitista neljä meni läpi, ja kun tarkastin ne silmämääräisesti, niissä oli kaikki tiedot oikein. Nämä neljä kululaskua menivät läpi myös Mobulta ja kirjanpitäjältä, ja tätä kirjoittaessani rahat ovat jo tilillä.
 
