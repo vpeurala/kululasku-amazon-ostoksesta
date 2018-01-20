@@ -7,15 +7,19 @@ const utils = require("./utils");
 
 const CURRENCYLAYER_COM_API_KEY = "737e36a2d5d98271355df3729abbec59";
 
-function callCurrencylayer(formattedDate, callback) {
-  http.get({
+function httpGetOptions(formattedDate) {
+  return {
     "hostname": "apilayer.net",
     "path": "/api/historical?access_key=" + CURRENCYLAYER_COM_API_KEY +
     "&date=" + formattedDate +
     "&currencies=EUR" +
     "&format=0",
     "timeout": 3000
-  }, (response) => {
+  };
+}
+
+function callCurrencylayer(formattedDate, callback) {
+  http.get(httpGetOptions(formattedDate), (response) => {
     if (response.statusCode !== 200) {
       response.resume();
       callback(
