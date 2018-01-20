@@ -7,7 +7,7 @@
     "editorconfig-check": "editorconfig-tools check ./**/*.js",
     "kululasku": "testcafe --debug-on-fail chrome src/create_kululasku.js",
     "lint": "eslint 'src/**/*.js' 'test/**/*.js'",
-    "test": "tape test/unit_tests.js"
+    "test": "istanbul cover tape test/unit_tests.js"
   },
   "repository": "git@github.com:vpeurala/kulari-amazon-ostoksesta.git",
   "author": "Ville Peurala <ville.peurala@gmail.com>",
@@ -23,6 +23,7 @@
     "editorconfig-tools": "^0.1.1",
     "eslint": "^4.14.0",
     "eslint-plugin-testcafe": "^0.2.1",
+    "istanbul": "^0.4.5",
     "nock": "^9.1.5",
     "tape": "^4.8.0"
   }
