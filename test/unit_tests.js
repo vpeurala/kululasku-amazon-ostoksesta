@@ -43,7 +43,7 @@ const CURRENCYLAYER_COM_QUERY_PARAMETERS = {
   "format": 0
 };
 
-tape("currency conversion happy path", async (t) => {
+tape("currency conversion, happy path", async (t) => {
   t.plan(1);
   nock.disableNetConnect();
   nock("http://apilayer.net")
@@ -55,7 +55,23 @@ tape("currency conversion happy path", async (t) => {
   t.equal(actual, expected);
 });
 
-tape("currency conversion internal server error", async (t) => {
+tape("currency conversion, success = false", async (t) => {
+  t.plan(1);
+  nock.disableNetConnect();
+  nock("http://apilayer.net")
+    .get("/api/historical")
+    .query(CURRENCYLAYER_COM_QUERY_PARAMETERS)
+    .reply(200, readTestResource("unsuccessful_response_from_currencylayer_com.json"));
+  try {
+    await currencyConversion.usdToEur(EXPECTED_PDF_PARSE_RESULT.priceInUsd, "2018-01-06");
+    t.fail("An exception should have been thrown.");
+  } catch (error) {
+    const expectedErrorMessage = "Getting exchange rates from currencylayer.com was not successful. Returned JSON was: { success: false }";
+    t.equal(error, expectedErrorMessage);
+  }
+});
+
+tape("currency conversion, internal server error", async (t) => {
   t.plan(1);
   nock.disableNetConnect();
   nock("http://apilayer.net")
