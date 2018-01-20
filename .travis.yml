@@ -1,12 +1,22 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=44d64634c6cbcd6ba32137957f49da20e23624395f2855365ce19e0abb849363
+language: node_js
 os:
   - osx
-language: node_js
 cache: yarn
 before_install:
   - brew install poppler
+  - brew install yarn
 before_script:
   - yarn install
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc_test_reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
   - yarn editorconfig-check
   - yarn lint
   - yarn test
+  - yarn coverage
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
