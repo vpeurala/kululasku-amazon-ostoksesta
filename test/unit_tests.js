@@ -36,11 +36,6 @@ tape("pdf parsing", (t) => {
   t.deepEqual(actualPdfParseResult, EXPECTED_PDF_PARSE_RESULT);
 });
 
-function readTestResource(filename) {
-  let resourcePath = __dirname + "/resources/" + filename;
-  return fs.readFileSync(resourcePath, "ASCII");
-}
-
 const CURRENCYLAYER_COM_QUERY_PARAMETERS = {
   "access_key": currencyConversion.CURRENCYLAYER_COM_API_KEY,
   "currencies": "EUR",
@@ -77,3 +72,8 @@ tape("currency conversion internal server error", async (t) => {
     t.equal(actualErrorMessage.substring(0, expectedErrorMessage.length), expectedErrorMessage);
   }
 });
+
+function readTestResource(filename) {
+  let resourcePath = __dirname + "/resources/" + filename;
+  return fs.readFileSync(resourcePath, "ASCII");
+}
