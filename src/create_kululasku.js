@@ -26,29 +26,25 @@ function usage() {
     "\x1b[92;1myarn kululasku\x1b[0m");
 }
 
-if (username === undefined) {
-  console.log("\x1b[31mERROR (missing mandatory input):\x1b[0m");
-  console.log("Missing required environment variable \x1b[93mETASKU_USERNAME\x1b[0m " +
-    "(your username to 'https://www.etasku.fi' service).");
-  usage();
-  process.exit(1);
+function assertVariableIsDefined(variable,
+                                 environmentVariableName,
+                                 explanation) {
+  if (variable === undefined) {
+    console.log("\x1b[31mERROR (missing mandatory input):\x1b[0m");
+    console.log("Missing required environment variable \x1b[93m" +
+      environmentVariableName +
+      "\x1b[0m " +
+      "(" +
+      explanation +
+      ").");
+    usage();
+    process.exit(1);
+  }
 }
 
-if (password === undefined) {
-  console.log("\x1b[31mERROR (missing mandatory input):\x1b[0m");
-  console.log("Missing required environment variable \x1b[93mETASKU_PASSWORD\x1b[0m " +
-    "(your password to 'https://www.etasku.fi' service).");
-  usage();
-  process.exit(1);
-}
-
-if (receiptFile === undefined) {
-  console.log("\x1b[31mERROR (missing mandatory input):\x1b[0m");
-  console.log("Missing required environment variable \x1b[93mAMAZON_INVOICE_PDF\x1b[0m " +
-    "(the invoice file downloaded from Amazon, in PDF format).");
-  usage();
-  process.exit(1);
-}
+assertVariableIsDefined(username, "ETASKU_USERNAME", "your username to 'https://www.etasku.fi' service");
+assertVariableIsDefined(password, "ETASKU_PASSWORD", "your password to 'https://www.etasku.fi' service");
+assertVariableIsDefined(receiptFile, "AMAZON_INVOICE_PDF", "the invoice file downloaded from Amazon, in PDF format");
 
 fs.access(receiptFile, fs.constants.F_OK, (error) => {
   if (error) {
