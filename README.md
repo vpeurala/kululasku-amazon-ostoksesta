@@ -6,6 +6,8 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5f3e5e48a34203dffff9/test_coverage)](https://codeclimate.com/github/vpeurala/kululasku-amazon-ostoksesta/test_coverage)
 
+[![Dependencies](https://david-dm.org/vpeurala/kululasku-amazon-ostoksesta.svg)](https://david-dm.org/vpeurala/kululasku-amazon-ostoksesta.svg)
+
 Tämä ohjelma automatisoi osittain kululaskun luonnin [eTaskuun](https://etasku.fi/) [Amazon](https://www.amazon.com/)-ostoksesta.
 
 Sinun pitää manuaalisesti hakea ostoksestasi PDF-kuitti Amazonista. Alla oleva opetusvideo näyttää, miten se tapahtuu. Sen jälkeen tämä skripti hoitaa loput.
