@@ -24,8 +24,7 @@ function callCurrencylayer(formattedDate, callback) {
       response.resume();
       callback(
         "Getting exchange rates from currencylayer.com was not successful. Response was: " +
-        util.inspect(response),
-        null);
+        util.inspect(response));
     }
     response.setEncoding("ASCII");
     let body = "";
@@ -33,8 +32,12 @@ function callCurrencylayer(formattedDate, callback) {
       body += chunk;
     });
     response.on("end", () => {
-      let json = JSON.parse(body);
-      callback(null, json);
+      try {
+        let json = JSON.parse(body);
+        callback(null, json);
+      } catch (error) {
+        callback(error);
+      }
     });
   }).on("error", (error) => {
     callback(
@@ -61,6 +64,9 @@ function usdToEur(usdAmount, purchaseDate) {
       let exchangeRate = json.quotes.USDEUR;
       let eurAmountRaw = exchangeRate * usdAmount;
       return utils.numberToTwoDecimalAccuracy(eurAmountRaw);
+    })
+    .catch((error) => {
+      throw error;
     });
 }
 

@@ -7,11 +7,15 @@ const parsePdf = require("../src/parse_pdf");
 const tape = require("tape");
 const utils = require("../src/utils");
 
-const responseFromCurrencylayerCom = fs.readFileSync(
-  __dirname + "/resources/response_from_currencylayer_com.json",
-  "ASCII");
+tape("number rounding", (t) => {
+  t.plan(1);
+  let expected = 13.37;
+  let inputToRounding = 13.368913453128;
+  let actual = utils.numberToTwoDecimalAccuracy(inputToRounding);
+  t.equal(actual, expected);
+});
 
-const expectedPdfParseResult = {
+const EXPECTED_PDF_PARSE_RESULT = {
   "orderNumber":
     "D01-0575136-8633850",
   "priceInUsd":
@@ -26,33 +30,50 @@ const expectedPdfParseResult = {
     "14.12.2017"
 };
 
-tape("number rounding", (t) => {
-  t.plan(1);
-  let expected = 13.37;
-  let inputToRounding = 13.368913453128;
-  let actual = utils.numberToTwoDecimalAccuracy(inputToRounding);
-  t.equal(actual, expected);
-});
-
 tape("pdf parsing", (t) => {
   t.plan(1);
   let actualPdfParseResult = parsePdf.parsePdf(__dirname + "/resources/Amazon_Invoice.pdf");
-  t.deepEqual(actualPdfParseResult, expectedPdfParseResult);
+  t.deepEqual(actualPdfParseResult, EXPECTED_PDF_PARSE_RESULT);
 });
 
-tape("currency conversion", async (t) => {
+function readTestResource(filename) {
+  let resourcePath = __dirname + "/resources/" + filename;
+  return fs.readFileSync(resourcePath, "ASCII");
+}
+
+const CURRENCYLAYER_COM_QUERY_PARAMETERS = {
+  "access_key": currencyConversion.CURRENCYLAYER_COM_API_KEY,
+  "currencies": "EUR",
+  "date": "2018-01-06",
+  "format": 0
+};
+
+tape("currency conversion happy path", async (t) => {
   t.plan(1);
   nock.disableNetConnect();
   nock("http://apilayer.net")
     .get("/api/historical")
-    .query({
-      "access_key": currencyConversion.CURRENCYLAYER_COM_API_KEY,
-      "currencies": "EUR",
-      "date": "2018-01-06",
-      "format": 0
-    })
-    .reply(200, responseFromCurrencylayerCom);
+    .query(CURRENCYLAYER_COM_QUERY_PARAMETERS)
+    .reply(200, readTestResource("successful_response_from_currencylayer_com.json"));
   let expected = 18.91;
-  let actual = await currencyConversion.usdToEur(expectedPdfParseResult.priceInUsd, "2018-01-06");
-  t.equal(expected, actual);
+  let actual = await currencyConversion.usdToEur(EXPECTED_PDF_PARSE_RESULT.priceInUsd, "2018-01-06");
+  t.equal(actual, expected);
+});
+
+tape("currency conversion internal server error", async (t) => {
+  t.plan(1);
+  nock.disableNetConnect();
+  nock("http://apilayer.net")
+    .get("/api/historical")
+    .query(CURRENCYLAYER_COM_QUERY_PARAMETERS)
+    .reply(500, "Internal server error");
+  try {
+    await currencyConversion.usdToEur(EXPECTED_PDF_PARSE_RESULT.priceInUsd, "2018-01-06");
+    t.fail("An exception should have been thrown.");
+  } catch (error) {
+    const expectedErrorMessage = "Getting exchange rates from currencylayer.com was not successful.";
+    let errorCause = error.cause;
+    let actualErrorMessage = errorCause.message;
+    t.equal(actualErrorMessage.substring(0, expectedErrorMessage.length), expectedErrorMessage);
+  }
 });
