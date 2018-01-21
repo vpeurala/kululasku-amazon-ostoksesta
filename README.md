@@ -16,7 +16,7 @@ Sinun pitää manuaalisesti hakea ostoksestasi PDF-kuitti Amazonista. Alla oleva
 
 Katso tämä, se on nopein tapa oppia ohjelman käyttö.
 
-TODO: Video tähän
+[![Opetusvideo](https://img.youtube.com/vi/C_zhs87a-TE/0.jpg)](https://www.youtube.com/watch?v=C_zhs87a-TE)
 
 ## Vaatimukset ympäristölle
 
