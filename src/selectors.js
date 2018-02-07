@@ -27,6 +27,7 @@ const toimiala = selector("select#Toimiala_select.dimensiongroup_select");
 const alue = selector("select#Alue_select.dimensiongroup_select");
 const palvelu = selector("select#Palvelu_select.dimensiongroup_select");
 const tallenna = selector("input#save_button");
+const takaisinVanhaanPalveluun = selector("a#backToOld");
 
 module.exports = {
   "alue": alue,
@@ -45,6 +46,7 @@ module.exports = {
   "ostopaiva": ostopaiva,
   "palvelu": palvelu,
   "salasana": salasana,
+  "takaisinVanhaanPalveluun": takaisinVanhaanPalveluun,
   "tallenna": tallenna,
   "toimiala": toimiala,
   "verokanta": verokanta

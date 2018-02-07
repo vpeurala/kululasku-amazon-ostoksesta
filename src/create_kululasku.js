@@ -99,6 +99,7 @@ test.page(ETASKU_FRONT_PAGE_URL)("Create kululasku", async (t) => {
     .typeText(s.kayttajatunnus, username, {"replace": true})
     .typeText(s.salasana, password, {"replace": true})
     .click(s.kirjauduSisaan)
+    .click(s.takaisinVanhaanPalveluun)
     .click(s.luoTosite)
     .setFilesToUpload(s.lisaaTiedosto, receiptFile)
     .typeText(s.ostopaiva, parsedReceipt.purchaseDateInETaskuFormat, {
